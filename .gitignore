@@ -1,0 +1,14 @@
+# Dependencies को ignore करें
+/node_modules
+/server/node_modules
+/client/node_modules
+
+# Environment Variables को ignore करें
+.env
+/server/.env
+/client/.env
+
+# Build Artifacts को ignore करें
+/dist
+/build
+/client/build
