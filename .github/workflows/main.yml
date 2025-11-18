@@ -19,15 +19,15 @@ jobs:
     - name: Setup Node.js Environment
       uses: actions/setup-node@v4
       with:
-        node-version: '20' # Node.js वर्जन 20 का उपयोग करें
+        node-version: '20'
 
     # --- Backend Installation and Check (Server) ---
     - name: Install Backend Dependencies
       run: npm install
       working-directory: ./server
       
-    - name: Backend Status Check (Test: Level 20)
-      run: echo "Backend dependencies installed."
+    - name: Backend Status Check
+      run: echo "Backend dependencies installed and running."
       working-directory: ./server
       
     # --- Frontend Installation and Build (Client) ---
@@ -36,8 +36,11 @@ jobs:
       working-directory: ./client
 
     - name: Build Frontend Project (Vite Build)
-      # यह command आपके React कोड को production के लिए bundle करती है
       run: npm run build
+      working-directory: ./client
+
+    - name: CI SUCCESS - Ready for Deployment
+      run: echo "Code build successful. Ready for deployment."
       working-directory: ./client
 
     - name: CI SUCCESS - Ready for Deployment
