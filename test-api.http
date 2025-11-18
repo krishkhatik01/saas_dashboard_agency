@@ -1,0 +1,10 @@
+### LEVEL 21: USER REGISTRATION TEST
+
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "name": "Agency Admin",
+    "email": "admin@agency.com",
+    "password": "strongpassword123"
+}
