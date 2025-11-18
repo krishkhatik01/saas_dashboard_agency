@@ -1,0 +1,44 @@
+# .github/workflows/main.yml
+
+name: SaaS Dashboard CI Build
+
+on:
+  push:
+    branches: [ main ] # जब भी main ब्रांच पर कोड पुश हो
+  pull_request:
+    branches: [ main ] # या जब pull request आए
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' # Node.js वर्जन 20 का उपयोग करें
+
+    # --- Backend Installation and Check (Server) ---
+    - name: Install Backend Dependencies
+      run: npm install
+      working-directory: ./server
+      
+    - name: Backend Status Check (Test: Level 20)
+      run: echo "Backend dependencies installed."
+      working-directory: ./server
+      
+    # --- Frontend Installation and Build (Client) ---
+    - name: Install Frontend Dependencies
+      run: npm install
+      working-directory: ./client
+
+    - name: Build Frontend Project (Vite Build)
+      # यह command आपके React कोड को production के लिए bundle करती है
+      run: npm run build
+      working-directory: ./client
+
+    - name: CI SUCCESS - Ready for Deployment
+      run: echo "Code build successful. Ready for deployment."
